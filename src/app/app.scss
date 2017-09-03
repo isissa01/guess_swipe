@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +12,25 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.login-btns ion-icon {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 1.7em;
+}
+
+.login-header {
+    width: 100%;
+    text-align: center;
+    font-size: 7em;
+    margin-top: 30%;
+}
+
+.register a {
+    color: green;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.center {
+    text-align: center;
+}
