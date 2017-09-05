@@ -4,12 +4,12 @@
     <description>An awesome Ionic/Cordova app.</description>
     <author email="isissa01@gmail.com" href="http://issadeveloper.com">Issa Issa</author>
     <universal-links>
-        <host name="https://bdbn2.app.goo.gl/&#xA;" scheme="https" />
+        <host name="bdbn2.app.goo.gl" scheme="https" />
         <host name="guessswipe.firebaseapp.com" scheme="https">
             <path url="/__/auth/callback" />
         </host>
     </universal-links>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.206:8101" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
@@ -83,6 +83,8 @@
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
     </platform>
+    <allow-navigation href="http://192.168.1.206:8101" />
+    <allow-navigation href="http://192.168.0.23:8101" />
     <engine name="android" spec="^6.2.3" />
     <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
     <plugin name="cordova-plugin-buildinfo" spec="^1.1.0" />
@@ -91,6 +93,10 @@
         <variable name="URL_SCHEME" value="com.firebase.cordova" />
     </plugin>
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
+    <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
+        <variable name="APP_ID" value="261574844334304" />
+        <variable name="APP_NAME" value="GuessSwipe" />
+    </plugin>
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.1" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
     <plugin name="cordova-plugin-statusbar" spec="^2.2.2" />

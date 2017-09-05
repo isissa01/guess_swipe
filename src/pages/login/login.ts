@@ -1,4 +1,4 @@
-import { HomePage } from '../home/home';
+import { TabsPage } from './../tabs/tabs';
 import  firebase  from 'firebase';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -28,7 +28,7 @@ export class LoginPage {
   login(){
     firebase.auth().signInWithEmailAndPassword(this.username, this.password).then((response)=>{
       console.log(response);
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(TabsPage, {user: response});
     }).catch((err)=>{
       console.error(err);
     });

@@ -1,4 +1,4 @@
-import { HomePage } from '../home/home';
+import { MainPage } from '../main/main';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from "firebase";
@@ -26,7 +26,7 @@ export class RegisterPage {
   register(){
     firebase.auth().createUserWithEmailAndPassword(this.username, this.password).then((response)=>{
       console.log(response);
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.push(MainPage);
     }).catch((err)=>{
       console.error(err);
     });

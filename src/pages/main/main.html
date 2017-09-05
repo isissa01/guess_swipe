@@ -18,8 +18,9 @@
         <ion-icon name="md-contact" color="secondary"></ion-icon>
     </div>
     <div class="login-btns">
-        <button (click)="google_login()" ion-button block outline color="danger"><ion-icon name="logo-google"></ion-icon> Login with Google</button>
-        <button (click)="facebook_login()" ion-button block><ion-icon name="logo-facebook"></ion-icon> Login with Facebook</button>
+        <button (click)="login('google')" ion-button block outline color="danger"><ion-icon name="logo-google"></ion-icon> Login with Google</button>
+        <button (click)="login('facebook')" ion-button block><ion-icon name="logo-facebook"></ion-icon> Login with Facebook</button>
+        <button (click)="login('twitter')" ion-button block><ion-icon name="logo-twitter"></ion-icon> Login with Twitter</button>
         <button (click)="email_login()" ion-button block color="light"><ion-icon name="mail"></ion-icon> Login with Email</button>
     </div>
     <p class="register center"> No account? <a (click)="register()" clear small>Create one here</a></p>

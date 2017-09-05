@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <!-- <ion-searchbar showCancelButton="true" (input)="searchMessages($event)"></ion-searchbar> -->
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list *ngFor="let message of messages">
+        <ion-item-sliding (click)="gotoConversation(message)">
+            <ion-item>
+                <ion-avatar item-start>
+                    <img [src]="user.photoURL">
+                </ion-avatar>
+                <h2>{{user.displayName}}</h2>
+                <p>{{message.content}}</p>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button color="primary">
+                  <ion-icon name="trash"></ion-icon>delete
+                </button>
+                <button ion-button color="secondary">
+                  <ion-icon name="mail"></ion-icon>Mark as unread
+                </button>
+                <button ion-button color="primary">
+                  <ion-icon name="archive"></ion-icon> Archive
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>

@@ -1,4 +1,3 @@
-import { HomePage } from './../pages/home/home';
 import { MainPage } from './../pages/main/main';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
@@ -9,7 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = MainPage;
 
 
 

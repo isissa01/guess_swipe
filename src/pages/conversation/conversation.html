@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons (click)="goBack()" start>
+            <button ion-button icon-only color="royal">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+        </ion-buttons>
+        <ion-title>{{friend.name}}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only color="royal">
+                <ion-icon name="information-circle"></ion-icon>                
+        </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+    <div *ngFor="let message of messages">
+
+
+        <div *ngIf="friend.uid == message.from_uid">
+            <ion-thumbnail item-start class="msg-thumbnail">
+                <img src="{{friend.photoURL}}">
+            </ion-thumbnail>
+            <ion-card color="primary" class="message left">
+                {{message.content}}
+            </ion-card>
+
+        </div>
+        <div *ngIf="user.uid == message.from_uid" text-right>
+            <ion-card color="secondary" class="message right">
+                {{message.content}}
+            </ion-card>
+        </div>
+    </div>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-textarea [(ngModel)]="msg" name="msg"></ion-textarea>
+        <ion-buttons end>
+            <button ion-button icon-right color="royal" (click)="sendMessage()">
+                Send
+                <ion-icon name="send"></ion-icon>
+              </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
+
+<!-- [(ngModel)]="msg " name="msg " -->
