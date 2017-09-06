@@ -6,13 +6,23 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>friends</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>friends</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let user of users">
+            <ion-thumbnail item-start>
+                <img src="{{user.photoURL}}">
+            </ion-thumbnail>
+            <h2>{{user.name}}</h2>
+            <button ion-button clear item-end (click)="(!me.friends[user.uid])? addFriend(user.uid) : sendMessage(user.uid)">{{(!me.friends[user.uid])?"add" : "message"}}</button>
+
+        </ion-item>
+    </ion-list>
 
 </ion-content>

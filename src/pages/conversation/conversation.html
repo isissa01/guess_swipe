@@ -20,18 +20,18 @@
     <div *ngFor="let message of messages">
 
 
-        <div *ngIf="friend.uid == message.from_uid">
+        <div *ngIf="friend.uid == message.uid">
             <ion-thumbnail item-start class="msg-thumbnail">
                 <img src="{{friend.photoURL}}">
             </ion-thumbnail>
             <ion-card color="primary" class="message left">
-                {{message.content}}
+                {{message.message}}
             </ion-card>
 
         </div>
-        <div *ngIf="user.uid == message.from_uid" text-right>
+        <div *ngIf="user.uid == message.uid" text-right>
             <ion-card color="secondary" class="message right">
-                {{message.content}}
+                {{message.message}}
             </ion-card>
         </div>
     </div>

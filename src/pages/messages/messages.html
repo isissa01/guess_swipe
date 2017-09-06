@@ -1,18 +1,19 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <!-- <ion-searchbar showCancelButton="true" (input)="searchMessages($event)"></ion-searchbar> -->
+        <ion-searchbar showCancelButton="true" (input)="searchMessages($event)"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <!--
     <ion-list *ngFor="let message of messages">
         <ion-item-sliding (click)="gotoConversation(message)">
             <ion-item>
                 <ion-avatar item-start>
                     <img [src]="user.photoURL">
                 </ion-avatar>
-                <h2>{{user.displayName}}</h2>
-                <p>{{message.content}}</p>
+                <h2>{{user.name}}</h2>
+                <p>{{message.message}}</p>
             </ion-item>
             <ion-item-options side="right">
                 <button ion-button color="primary">
@@ -26,5 +27,5 @@
                 </button>
             </ion-item-options>
         </ion-item-sliding>
-    </ion-list>
+    </ion-list> -->
 </ion-content>

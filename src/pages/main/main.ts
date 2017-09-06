@@ -18,7 +18,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 export class MainPage {
   usersRef$ ;
   userRef;
-  user: User;
+  user;
   alreadyHaveAccount = false;
   constructor(private db: AngularFireDatabase,private fire: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   this.usersRef$ = this.db.list('/users');
@@ -47,8 +47,12 @@ export class MainPage {
         photoURL: result.user.photoURL,
         email: result.user.email,
         name: result.user.displayName,
-        messages : [],
-        friends : [],
+        messages : {
+          
+        },
+        friends : {
+          admin: true
+        },
         timestamp: firebase.database.ServerValue.TIMESTAMP
       };
       this.userRef = this.db.object(`/users/${this.user.uid}`);

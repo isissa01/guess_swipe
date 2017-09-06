@@ -20,40 +20,24 @@ import firebase from "firebase";
   templateUrl: 'messages.html',
 })
 export class MessagesPage {
-  messages:Message[] = [];
-  user : User;
-
-  friends: User[] = [];
+  messages = [];
+  user;
+  friends = [];
 
   msgSub;
   constructor(private fire: AngularFireAuth, private db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
      this.user =this.getUser(this.fire.auth.currentUser.uid);
-    
-    this.msgSub = this.db.list('/messages').subscribe(data =>{
-      data.map(message =>{
-        if (message.to_uid === this.user.uid ){
-
-           this.addFriend(message.from_uid);
-        }
-        else if (message.from_uid === this.user.uid){
-
-          this.addFriend(message.to_uid);
-          
-        }
-        this.messages.push(message);
-
-        
-      });
-    });
+     
+     this.messages = this.getMessages(this.user.uid);
 
   }
   getUser(uid:string){
-    let tempUser: User;
+    let tempUser ;
     this.db.object(`users/${uid}`).subscribe(data =>{
       tempUser = data;
       
     });
-  return tempUser
+  return tempUser;
     
     
   }
@@ -65,7 +49,7 @@ export class MessagesPage {
     });
     if (tempFr.length == 0){
       this.db.object(`users/${uid}`).subscribe(data =>{
-        let friend :User= data;
+        let friend = data;
 
         this.friends.push(friend);
 
@@ -77,23 +61,42 @@ export class MessagesPage {
     
   }
   
-  // getMessages(){
-  //   this.user = this.db.list("/users");
-  //   console.log(this.user);
-  // }
+  getMessages(uid){
+    let tempMessages= [];
+    this.db.object(`users/${uid}/chats`).subscribe(data =>{
+      let chatsUids = data;
+      for(let chatUid in chatsUids){
+        this.db.object(`/chats/${chatUid}`).subscribe(chatData =>{
+          console.log(chatData);
+        });
+        
+      }
+      
+      
+      // this.db.object(`users/${uid}/friends`);
+    });
+    // this.db.list('/messages').subscribe(data =>{
+    //   data.map(message =>{
 
-  // searchMessages(event){
-    
-  //   let query = event.target.value;
+    //       tempMessages.push(message);
+           
+    //   });
+    // });
+    return tempMessages;
+  }
 
-  //   if(query && query.trim != ''){
-  //     this.messages = this.messages.filter((message)=>{
-  //       return  (message.)
-  //     });
+  searchMessages(event){
+    this.messages = this.getMessages(this.user.uid);
+    let query:string = event.target.value;
+
+    if(query && query.trim() != ''){
+      this.messages = this.messages.filter((message)=>{
+        return  (message.content.toLowerCase().indexOf(query.toLowerCase()) > -1);
+      });
 
 
-  //   }
-  // }
+    }
+  }
   gotoConversation(message){
     this.navCtrl.setRoot(ConversationPage, {friend: (this.user.uid == message.from_uid)? message.to_uid : message.from_uid, user: this.user});
   }

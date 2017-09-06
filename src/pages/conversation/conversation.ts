@@ -16,24 +16,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'conversation.html',
 })
 export class ConversationPage {
-  friend : User;
+  friend;
   msg: string;
-  messages: Message[] = [] ;
-  user : User;
+  messages =[] ;
+  user;
+  chatUid;
   msgSub;
 
   constructor(private db: AngularFireDatabase,private fire: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
-    let uid = this.navParams.get("friend");
-    let friendRef = this.db.object(`users/${uid}`);
-    
-    friendRef.subscribe(data =>{
-      this.friend = data;
-    });
-    console.log(this.friend);
-    
-    this.user = this.navParams.get("user");
-    this.msgSub = this.db.list('/messages').subscribe(data =>{
+    this.chatUid = this.navParams.get("chatUid");
+    console.log(this.chatUid);
+    this.user = this.getUser(this.fire.auth.currentUser.uid);
+    this.friend = this.getUser(this.navParams.get("friend_uid"))
+    this.msgSub = this.db.list(`/messages/${this.chatUid}`).subscribe(data =>{
       this.messages = data;
+      console.log(this.messages);
     });
 
   }
@@ -44,17 +41,28 @@ export class ConversationPage {
   }
   sendMessage(){
     if(this.msg.trim() != ""){
-      this.db.list("/messages").push({
-        content: this.msg,
-        from_uid: this.user.uid,
-        to_uid: this.friend.uid,
+      this.db.list(`/messages/${this.chatUid}`).push({
+        message: this.msg,
+        uid: this.user.uid,
         timestamp: firebase.database.ServerValue.TIMESTAMP
       }).then((message)=>{
+        console.log(message);
+        this.db.object(`chats/${this.chatUid}`).update({
+          lastMessage: message.key
+        })
         this.msg = "";
-  
       });
     }
     
+  }
+
+  getUser(uid:string){
+    let tempUser: any;
+    this.db.object(`users/${uid}`).subscribe(data =>{
+      tempUser = data;
+      
+    });
+    return tempUser; 
   }
   
 
